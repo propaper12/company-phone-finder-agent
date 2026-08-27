@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Node.js
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Gizlilik Koruması: Excel, CSV ve Veri Dosyaları (Asla GitHub'a Gitmez!)
+*.xlsx
+*.xls
+*.csv
+*.tmp
+*.bak
+
+# Geçici Analiz ve Test Dosyaları
+test_ito.py
+test_crypto.py
+inspect_*.py
+find_*.py
+check_chunks.py
+
+# OS / Editör
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.streamlit/

@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity 10K Intelligence & Phone Agent</title>
+  <style>
+    :root {
+      --bg-base: #020617;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --border-subtle: rgba(51, 65, 85, 0.6);
+      --primary: #0ea5e9;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+    
+    body {
+      background: radial-gradient(circle at 50% 0%, #0c1838 0%, var(--bg-base) 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+
+    .container { max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 18px 22px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.7), 0 0 20px rgba(14, 165, 233, 0.08);
+    }
+
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+      border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 18px;
+      padding: 14px 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(14, 165, 233, 0.1);
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+    }
+    .brand-title { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; color: #ffffff; }
+    .brand-sub { font-size: 11px; color: #38bdf8; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .tab-bar { display: flex; gap: 10px; border-bottom: 1px solid rgba(51, 65, 85, 0.5); padding-bottom: 6px; }
+    .tab-btn {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-subtle); color: var(--text-muted);
+      padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 12px;
+      cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+    }
+    .tab-btn:hover { background: rgba(30, 41, 59, 0.8); color: #f8fafc; border-color: rgba(56, 189, 248, 0.3); }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #0284c7, #4f46e5); color: #ffffff;
+      border-color: #38bdf8; box-shadow: 0 4px 18px rgba(14, 165, 233, 0.35);
+    }
+
+    .grid-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+    .metric-card {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(11, 18, 36, 0.7));
+      border: 1px solid var(--border-subtle); border-radius: 14px;
+      padding: 16px; display: flex; flex-direction: column; gap: 6px;
+      position: relative; overflow: hidden;
+    }
+    .metric-card::after {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.6;
+    }
+    .metric-label { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-value { font-size: 22px; font-weight: 900; color: #ffffff; font-family: ui-monospace, monospace; }
+
+    .progress-container {
+      background: #090d16; border: 1px solid #1e293b; border-radius: 10px;
+      padding: 4px; position: relative; overflow: hidden;
+    }
+    .progress-fill {
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+      height: 18px; border-radius: 8px; width: 0%; transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; overflow: hidden;
+    }
+    .progress-fill::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer { 100% { left: 100%; } }
+    .progress-text {
+      position: absolute; width: 100%; text-align: center; top: 4px;
+      font-size: 11px; font-weight: 900; color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    }
+
+    .control-grid { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 16px; }
+    @media (max-width: 1024px) { .control-grid { grid-template-columns: 1fr; } }
+
+    .dropzone {
+      border: 2px dashed rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 18px;
+      text-align: center; cursor: pointer; transition: all 0.2s; background: rgba(7, 13, 30, 0.6);
+    }
+    .dropzone:hover { border-color: #38bdf8; background: rgba(14, 165, 233, 0.08); }
+
+    button {
+      padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: 12px;
+      cursor: pointer; transition: all 0.2s; border: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #2563eb); color: white; width: 100%;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5); transform: translateY(-1px); }
+    
+    .btn-reset {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6); color: white; width: 100%;
+      box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
+    }
+    .btn-reset:hover { box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.7); color: #e2e8f0; border: 1px solid #334155; width: 100%;
+    }
+    .btn-secondary:hover { background: #334155; color: #ffffff; }
+
+    .btn-stop { background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; width: 100%; }
+    .btn-stop:hover { box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4); }
+
+    .btn-ai {
+      background: linear-gradient(135deg, #8b5cf6, #d946ef); color: white; border: none;
+      padding: 5px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.35); transition: transform 0.15s;
+    }
+    .btn-ai:hover { transform: scale(1.05); }
+
+    .btn-find {
+      background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.35);
+      padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
+    }
+    .btn-find:hover { background: #0ea5e9; color: #ffffff; }
+
+    .btn-google {
+      background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
+    }
+    .btn-google:hover { background: #f59e0b; color: #020617; }
+
+    .btn-copy {
+      background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 6px; border-radius: 4px; font-size: 10px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-copy:hover { background: #38bdf8; color: #020617; }
+
+    button:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+    select, input[type="text"], input[type="search"] {
+      background: rgba(9, 13, 22, 0.9); border: 1px solid rgba(51, 65, 85, 0.8); color: #f8fafc;
+      padding: 8px 12px; border-radius: 8px; font-size: 12px; outline: none; transition: border-color 0.2s;
+    }
+    select:focus, input:focus { border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.2); }
+
+    .hud-box {
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(135deg, rgba(8, 15, 34, 0.9), rgba(5, 11, 24, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px;
+      padding: 14px 20px; position: relative; overflow: hidden;
+    }
+    .radar {
+      width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(56, 189, 248, 0.5);
+      position: relative; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+    .radar-sweep {
+      position: absolute; width: 100%; height: 100%; border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 60%, rgba(6, 182, 212, 0.6) 100%);
+      animation: spin 2s linear infinite; display: none;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    .terminal {
+      background: #020617; border: 1px solid #1e293b; border-radius: 12px;
+      padding: 12px 14px; height: 140px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 11px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .table-container { overflow-x: auto; max-height: 540px; border-radius: 12px; border: 1px solid var(--border-subtle); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
+    th {
+      background: #0f172a; padding: 12px 14px; color: #94a3b8; font-weight: 800;
+      position: sticky; top: 0; z-index: 5; border-bottom: 1px solid #1e293b; white-space: nowrap;
+      text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid rgba(30, 41, 59, 0.5); }
+    tr:hover td { background: rgba(30, 41, 59, 0.4); }
+
+    .badge-ok {
+      background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 3px 8px;
+      border-radius: 6px; font-weight: 800; font-size: 10px; border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .badge-fail {
+      background: rgba(239, 68, 68, 0.15); color: #f87171; padding: 3px 8px;
+      border-radius: 6px; font-weight: 800; font-size: 10px; border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .badge-wait {
+      background: rgba(148, 163, 184, 0.15); color: #94a3b8; padding: 3px 8px;
+      border-radius: 6px; font-weight: 800; font-size: 10px;
+    }
+
+    .filter-chip {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; color: #94a3b8;
+      padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    }
+    .filter-chip.active { background: #0284c7; color: white; border-color: #38bdf8; }
+
+    .editable-cell { cursor: pointer; border-radius: 6px; padding: 4px 6px; transition: all 0.15s; }
+    .editable-cell:hover { background: rgba(56, 189, 248, 0.15); outline: 1px dashed #38bdf8; }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center; z-index: 100;
+    }
+    .modal-content {
+      background: linear-gradient(145deg, #0b1329, #060b18);
+      border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 18px;
+      width: 90%; max-width: 640px; padding: 26px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.15);
+      position: relative; animation: popIn 0.2s ease-out;
+    }
+    @keyframes popIn { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <div class="brand-title">10K Şirket Telefon & AI İstihbarat Agent</div>
+        <div class="brand-sub">Find.com.tr & Resmi Web Siteleri Entegrasyonlu Motor</div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button id="downloadBtn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; display: none;">
+        📥 Güncel Excel İndir
+      </button>
+      <div style="font-size: 11px; color: #10b981; font-weight: 800; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.35); padding: 6px 12px; border-radius: 8px;">
+        🔒 %100 Yerel & Gizlilik Korumalı
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tabScannerBtn" onclick="switchTab('scanner')">
+      ⚡ Canlı Tarama & Radar
+    </button>
+    <button class="tab-btn" id="tabEditorBtn" onclick="switchTab('editor')">
+      📊 İnteraktif Excel Tablosu & Find.com.tr Entegrasyonu
+    </button>
+  </div>
+
+  <!-- Metrics Bar -->
+  <div class="grid-metrics">
+    <div class="metric-card">
+      <span class="metric-label">Toplam Satır</span>
+      <span class="metric-value" id="mTotal">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">İşlenen</span>
+      <span class="metric-value" id="mProcessed" style="color:#38bdf8;">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">Bulunan Numara</span>
+      <span class="metric-value" id="mFound" style="color:#34d399;">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">Bulunamayan</span>
+      <span class="metric-value" id="mNotFound" style="color:#f87171;">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">Başarı Oranı</span>
+      <span class="metric-value" id="mRate" style="color:#a78bfa;">%0.0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-label">Tarama Hızı</span>
+      <span class="metric-value" id="mSpeed" style="color:#fbbf24;">0 /sn</span>
+    </div>
+  </div>
+
+  <!-- Shimmer Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-fill" id="progFill"></div>
+    <div class="progress-text" id="progText">0%</div>
+  </div>
+
+  <!-- TAB 1: CANLI TARAMA & RADAR -->
+  <div id="tabScannerView">
+    <div class="control-grid">
+      
+      <!-- 1. Dosya -->
+      <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">1. DOSYA YÜKLE VEYA SEÇ</div>
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display: none;" />
+            <div id="fileLabel" style="font-weight: 800; color: #38bdf8; font-size: 13px;">📂 Excel veya CSV Bırakın</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">.xlsx, .xls, .csv desteklenir</div>
+          </div>
+        </div>
+
+        <div id="fileDetails" style="display: none; margin-top: 12px; padding-top: 10px; border-top: 1px solid #1e293b; font-size: 11px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="color: #94a3b8; font-weight: 600;">🏢 Şirket Sütunu:</span>
+            <select id="columnSelect" style="max-width: 170px;"></select>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #94a3b8; font-weight: 600;">📍 Şehir / Adres:</span>
+            <select id="locationSelect" style="max-width: 170px;">
+              <option value="">(Yok / Belirtilmemiş)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Ayarlar -->
+      <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">2. HIZ & MOTOR AYARLARI</div>
+          <div style="margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span style="color: #94a3b8; font-weight: 600;">Eşzamanlı İş Parçacığı (Worker)</span>
+              <span id="workerVal" style="color: #22d3ee; font-weight: 800;">15 Worker</span>
+            </div>
+            <input type="range" id="workerSlider" min="5" max="35" value="15" step="1" />
+            <div style="font-size: 10px; color: #64748b; margin-top: 3px;">Maksimum hız için 15-25 worker önerilir.</div>
+          </div>
+
+          <label style="display: flex; align-items: center; gap: 10px; font-size: 12px; background: rgba(9, 13, 22, 0.7); padding: 10px 12px; border-radius: 10px; border: 1px solid #1e293b; cursor: pointer;">
+            <input type="checkbox" id="deepCheck" style="accent-color: #06b6d4; width: 16px; height: 16px;" />
+            <div>
+              <div style="font-weight: 700; color: #e2e8f0;">🌐 Resmi Web Sitelerinin İçine Gir (Derin Mod)</div>
+              <div style="font-size: 10px; color: #64748b;">Kapalıyken 3 kat daha hızlı çalışır (Özet taraması)</div>
+            </div>
+          </label>
+        </div>
+
+        <div style="font-size: 11px; color: #64748b; margin-top: 8px;">
+          Arama Motoru: <span style="color: #34d399; font-weight: 800;">Find.com.tr, Firmatlas & Resmi Web Siteleri</span>
+        </div>
+      </div>
+
+      <!-- 3. Eylemler -->
+      <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
+        <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">3. KONTROL</div>
+        <button id="startBtn" class="btn-primary" disabled>🚀 Kalanları Tara</button>
+        <button id="resetAllBtn" class="btn-reset" disabled>🔁 Tümünü Sıfırdan Baştan Tara</button>
+        <button id="retryBtn" class="btn-secondary" disabled>🔄 Sadece Bulunamayanları Tara</button>
+        <button id="stopBtn" class="btn-stop" disabled>⏹️ Durdur</button>
+        <div id="statusNotice" style="font-size: 11px; color: #64748b; text-align: center; margin-top: 2px;">Lütfen dosya yükleyin</div>
+      </div>
+    </div>
+
+    <!-- HUD & Terminal -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+      <div class="hud-box">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="radar">
+            <div class="radar-sweep" id="radarSweep"></div>
+            <div style="width: 10px; height: 10px; background: #06b6d4; border-radius: 50%; box-shadow: 0 0 10px #06b6d4;"></div>
+          </div>
+          <div>
+            <div style="font-size: 10px; color: #94a3b8; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">AGENT CANLI DURUMU</div>
+            <div id="hudStatus" style="font-size: 15px; font-weight: 900; color: #38bdf8;">Beklemede</div>
+            <div id="hudSub" style="font-size: 11px; color: #64748b;">Dosya bekleniyor...</div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 10px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">ANLIK HIZ</div>
+          <div id="hudSpeed" style="font-size: 20px; font-weight: 900; color: #34d399; font-family: ui-monospace, monospace;">0 <span style="font-size:11px;color:#64748b;">/sn</span></div>
+          <div id="hudEta" style="font-size: 11px; color: #64748b;">Kalan: —</div>
+        </div>
+      </div>
+
+      <div class="terminal" id="terminal">
+        <div style="color: #64748b;">[SİSTEM] Agent hazır. Excel yükleyin veya seçin.</div>
+      </div>
+    </div>
+
+    <!-- Live Preview Stream Table -->
+    <div class="glass-card" style="margin-top: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div style="font-size: 13px; font-weight: 800; color: #f8fafc; letter-spacing: -0.3px;">⚡ CANLI TARAMA AKIŞI (Son 200 İşlem)</div>
+        <div style="display: flex; gap: 8px;">
+          <button id="btnFilterAll" class="btn-secondary" style="padding: 5px 12px; font-size: 11px;">Tümü</button>
+          <button id="btnFilterFound" class="btn-secondary" style="padding: 5px 12px; font-size: 11px;">Sadece Bulunanlar</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>Şirket Adı</th>
+              <th style="width: 170px;">Bulunan Telefon</th>
+              <th style="width: 110px;">Durum</th>
+              <th>Doğrulanan Kaynak URL</th>
+              <th style="width: 170px; text-align: center;">Hızlı Doğrulama</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr><td colspan="6" style="text-align: center; color: #64748b; padding: 28px;">Henüz taranan kayıt yok.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: İNTERAKTİF EXCEL TABLOSU & FIND.COM.TR ENTEGRASYONU -->
+  <div id="tabEditorView" style="display: none;">
+    <div class="glass-card">
+      
+      <!-- Top Filters & Search Bar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+        
+        <!-- Filter Tabs -->
+        <div style="display: flex; gap: 6px; align-items: center;">
+          <button class="filter-chip active" id="fAll" onclick="setEditorFilter('all')">🌐 Tümü</button>
+          <button class="filter-chip" id="fFound" onclick="setEditorFilter('found')">✅ Numarası Olanlar (En Üstte)</button>
+          <button class="filter-chip" id="fNotFound" onclick="setEditorFilter('not_found')">❌ Bulunamayanlar</button>
+          <button class="filter-chip" id="fPending" onclick="setEditorFilter('pending')">⏳ Bekleyenler</button>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <input type="search" id="editorSearch" placeholder="🔍 Tabloda şirket, telefon veya adres ara..." style="width: 280px;" />
+          <button id="editorRefreshBtn" class="btn-secondary" style="padding: 8px 14px;">🔄 Yenile</button>
+        </div>
+      </div>
+
+      <!-- Stats Summary Pill -->
+      <div style="display: flex; gap: 12px; margin-bottom: 12px; font-size: 11px; color: #94a3b8; align-items: center; flex-wrap: wrap;">
+        <span style="background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); padding: 4px 10px; border-radius: 8px; color: #38bdf8; font-weight: 700;" id="stFound">Bulunan: 0</span>
+        <span style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 10px; border-radius: 8px; color: #f87171; font-weight: 700;" id="stNotFound">Bulunamayan: 0</span>
+        <span style="background: rgba(148, 163, 184, 0.15); padding: 4px 10px; border-radius: 8px; color: #94a3b8; font-weight: 700;" id="stPending">Bekleyen: 0</span>
+        <span style="margin-left: auto; color: #38bdf8; font-size: 11px;">🔍 <b>Find.com.tr & Google Butonları:</b> Bulunamayan şirketleri 1-tıkla doğrudan Find ve Google'da aratabilirsiniz.</span>
+      </div>
+
+      <div class="table-container" style="max-height: 600px;">
+        <table>
+          <thead id="editorTableHead">
+            <tr><th>Yükleniyor...</th></tr>
+          </thead>
+          <tbody id="editorTableBody">
+            <tr><td style="text-align: center; color: #64748b; padding: 28px;">Dosya bekleniyor...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px;">
+        <div id="editorPageInfo" style="color: #94a3b8; font-weight: 600;">Sayfa 1 / 1 (0 Kayıt)</div>
+        <div style="display: flex; gap: 8px;">
+          <button id="prevPageBtn" class="btn-secondary" style="padding: 6px 14px;">◀ Önceki</button>
+          <button id="nextPageBtn" class="btn-secondary" style="padding: 6px 14px;">Sonraki ▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- AI COMPANY INTELLIGENCE MODAL -->
+<div class="modal-backdrop" id="aiModal">
+  <div class="modal-content">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 14px; margin-bottom: 18px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #8b5cf6, #d946ef); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🤖</div>
+        <div>
+          <div style="font-size: 15px; font-weight: 900; color: #f8fafc;" id="aiModalTitle">Şirket İstihbarat Raporu</div>
+          <div style="font-size: 11px; color: #a78bfa; font-weight: 700;" id="aiModalSub">Antigravity AI Analisti (Sıfır API Masrafı)</div>
+        </div>
+      </div>
+      <button onclick="closeAiModal()" style="background: rgba(30, 41, 59, 0.6); border: 1px solid #334155; color: #94a3b8; font-size: 14px; width: 28px; height: 28px; border-radius: 8px; cursor: pointer;">✕</button>
+    </div>
+
+    <div id="aiModalBody">
+      <div style="text-align: center; padding: 36px; color: #38bdf8;">
+        <div style="font-size: 32px; animation: spin 1s linear infinite; display: inline-block;">⚙️</div>
+        <div style="margin-top: 14px; font-weight: 800; font-size: 14px;">Yapay Zeka Şirket Bilgilerini Analiz Ediyor...</div>
+        <div style="font-size: 11px; color: #64748b; margin-top: 4px;">Web sitesi, faaliyet alanı ve istihbarat verileri taranıyor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentData = null;
+  let items = [];
+  let filterMode = 'all';
+  let ws = null;
+  let editorPage = 1;
+  let currentTableFilter = 'all';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const fileLabel = document.getElementById('fileLabel');
+  const fileDetails = document.getElementById('fileDetails');
+  const columnSelect = document.getElementById('columnSelect');
+  const locationSelect = document.getElementById('locationSelect');
+  const startBtn = document.getElementById('startBtn');
+  const resetAllBtn = document.getElementById('resetAllBtn');
+  const retryBtn = document.getElementById('retryBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const statusNotice = document.getElementById('statusNotice');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const workerSlider = document.getElementById('workerSlider');
+  const workerVal = document.getElementById('workerVal');
+  const deepCheck = document.getElementById('deepCheck');
+
+  const mTotal = document.getElementById('mTotal');
+  const mProcessed = document.getElementById('mProcessed');
+  const mFound = document.getElementById('mFound');
+  const mNotFound = document.getElementById('mNotFound');
+  const mRate = document.getElementById('mRate');
+  const mSpeed = document.getElementById('mSpeed');
+  const progFill = document.getElementById('progFill');
+  const progText = document.getElementById('progText');
+
+  const hudStatus = document.getElementById('hudStatus');
+  const hudSub = document.getElementById('hudSub');
+  const hudSpeed = document.getElementById('hudSpeed');
+  const hudEta = document.getElementById('hudEta');
+  const radarSweep = document.getElementById('radarSweep');
+  const terminal = document.getElementById('terminal');
+  const tableBody = document.getElementById('tableBody');
+
+  function switchTab(tab) {
+    document.getElementById('tabScannerBtn').classList.toggle('active', tab === 'scanner');
+    document.getElementById('tabEditorBtn').classList.toggle('active', tab === 'editor');
+    document.getElementById('tabScannerView').style.display = tab === 'scanner' ? 'block' : 'none';
+    document.getElementById('tabEditorView').style.display = tab === 'editor' ? 'block' : 'none';
+    if (tab === 'editor') {
+      loadEditorTable();
+    }
+  }
+
+  function setEditorFilter(mode) {
+    currentTableFilter = mode;
+    document.getElementById('fAll').classList.toggle('active', mode === 'all');
+    document.getElementById('fFound').classList.toggle('active', mode === 'found');
+    document.getElementById('fNotFound').classList.toggle('active', mode === 'not_found');
+    document.getElementById('fPending').classList.toggle('active', mode === 'pending');
+    editorPage = 1;
+    loadEditorTable();
+  }
+
+  workerSlider.addEventListener('input', (e) => {
+    workerVal.textContent = `${e.target.value} Worker`;
+  });
+
+  function log(msg, color = '#94a3b8') {
+    const el = document.createElement('div');
+    el.style.color = color;
+    el.style.marginBottom = '2px';
+    const now = new Date().toTimeString().split(' ')[0];
+    el.textContent = `[${now}] ${msg}`;
+    terminal.appendChild(el);
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', async (e) => {
+    if (!e.target.files.length) return;
+    const file = e.target.files[0];
+    const fd = new FormData();
+    fd.append('file', file);
+    log(`Yükleniyor: ${file.name}...`, '#22d3ee');
+    try {
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const d = await res.json();
+      onFileLoaded(d);
+    } catch (err) {
+      log(`Hata: ${err.message}`, '#f87171');
+    }
+  });
+
+  function onFileLoaded(d) {
+    currentData = d;
+    fileLabel.textContent = `Yüklendi: ${d.filename}`;
+    fileDetails.style.display = 'block';
+    downloadBtn.style.display = 'inline-block';
+
+    columnSelect.innerHTML = '';
+    locationSelect.innerHTML = '<option value="">(Yok / Belirtilmemiş)</option>';
+    
+    d.columns.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c;
+      if (c === d.detected_column) opt.selected = true;
+      columnSelect.appendChild(opt);
+
+      const optLoc = document.createElement('option');
+      optLoc.value = c;
+      optLoc.textContent = c;
+      if (c === d.detected_location_column) optLoc.selected = true;
+      locationSelect.appendChild(optLoc);
+    });
+
+    mTotal.textContent = d.total_rows.toLocaleString();
+    mProcessed.textContent = d.completed_rows.toLocaleString();
+    mFound.textContent = d.found_count.toLocaleString();
+    mNotFound.textContent = d.not_found_count.toLocaleString();
+    
+    const r = d.completed_rows > 0 ? (d.found_count / d.completed_rows * 100).toFixed(1) : '0.0';
+    mRate.textContent = `%${r}`;
+    
+    const pct = d.total_rows > 0 ? Math.round((d.completed_rows / d.total_rows) * 100) : 0;
+    progFill.style.width = `${pct}%`;
+    progText.textContent = `${pct}%`;
+
+    startBtn.disabled = d.pending_count === 0;
+    resetAllBtn.disabled = false;
+    retryBtn.disabled = d.unfound_count === 0;
+    retryBtn.textContent = `🔄 Sadece Bulunamayanları Tara (${d.unfound_count})`;
+
+    hudStatus.textContent = "Hazır";
+    hudSub.textContent = `${d.filename} (${d.total_rows} satır)`;
+    statusNotice.textContent = `${d.total_rows.toLocaleString()} satır yüklendi.`;
+    log(`Dosya yüklendi: ${d.filename} (${d.total_rows} satır)`, '#34d399');
+
+    items = d.preview || [];
+    render();
+  }
+
+  function connectWS() {
+    const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    ws = new WebSocket(`${proto}//${window.location.host}/ws/scan`);
+
+    ws.onmessage = (e) => {
+      const m = JSON.parse(e.data);
+      if (m.type === 'progress') {
+        mProcessed.textContent = m.completed_rows.toLocaleString();
+        mFound.textContent = m.found_count.toLocaleString();
+        mNotFound.textContent = m.not_found_count.toLocaleString();
+        mRate.textContent = `%${m.success_rate}`;
+        mSpeed.textContent = `${m.speed} /sn`;
+        hudSpeed.innerHTML = `${m.speed} <span style="font-size:11px;color:#64748b;">/sn</span>`;
+
+        const pct = Math.min(100, Math.round((m.completed_rows / m.total_rows) * 100));
+        progFill.style.width = `${pct}%`;
+        progText.textContent = `${pct}%`;
+
+        const left = m.target_count - m.done_count;
+        if (m.speed > 0 && left > 0) {
+          const sec = Math.round(left / m.speed);
+          hudEta.textContent = `Kalan: ${Math.floor(sec/60)}dk ${sec%60}sn`;
+        }
+
+        if (m.latest_item) {
+          hudSub.textContent = `${m.latest_item.company} ➔ ${m.latest_item.phone}`;
+          const ok = m.latest_item.status === 'Tamamlandı';
+          log(`[${m.latest_item.status}] ${m.latest_item.company}: ${m.latest_item.phone}`, ok ? '#34d399' : '#94a3b8');
+          items.unshift(m.latest_item);
+          if (items.length > 200) items.pop();
+          render();
+        }
+      }
+      else if (m.type === 'done') {
+        setRunning(false);
+        hudStatus.textContent = "Tamamlandı";
+        statusNotice.textContent = "🎉 Tarama tamamlandı!";
+        downloadBtn.style.display = 'inline-block';
+        log(`İŞLEM BİTTİ! Toplam bulunan: ${m.found_count}`, '#34d399');
+        if (m.not_found_count > 0) {
+          retryBtn.disabled = false;
+          retryBtn.textContent = `🔄 Sadece Bulunamayanları Tara (${m.not_found_count})`;
+        }
+      }
+    };
+    ws.onclose = () => setTimeout(connectWS, 1500);
+  }
+  connectWS();
+
+  function setRunning(r) {
+    startBtn.disabled = r;
+    resetAllBtn.disabled = r;
+    retryBtn.disabled = r;
+    stopBtn.disabled = !r;
+    radarSweep.style.display = r ? 'block' : 'none';
+    hudStatus.textContent = r ? "Taranıyor..." : "Durdu";
+  }
+
+  startBtn.addEventListener('click', () => {
+    if (!ws || !currentData) return;
+    setRunning(true);
+    log("Kalanlar taranıyor...", "#22d3ee");
+    ws.send(JSON.stringify({
+      action: 'start',
+      mode: 'all',
+      concurrency: parseInt(workerSlider.value),
+      deep_scan: deepCheck.checked,
+      company_col: columnSelect.value,
+      location_col: locationSelect.value
+    }));
+  });
+
+  resetAllBtn.addEventListener('click', () => {
+    if (!ws || !currentData) return;
+    if (!confirm("Tüm sonuçlar sıfırlanacak ve listenin tamamı baştan taranacaktır. Onaylıyor musunuz?")) return;
+    setRunning(true);
+    mProcessed.textContent = '0';
+    mFound.textContent = '0';
+    mNotFound.textContent = '0';
+    mRate.textContent = '%0.0';
+    progFill.style.width = '0%';
+    progText.textContent = '0%';
+    items = [];
+    render();
+    log("TÜM LİSTE SIFIRLANDI. Sıfırdan baştan taranıyor...", "#ec4899");
+    ws.send(JSON.stringify({
+      action: 'start',
+      mode: 'reset_all',
+      concurrency: parseInt(workerSlider.value),
+      deep_scan: deepCheck.checked,
+      company_col: columnSelect.value,
+      location_col: locationSelect.value
+    }));
+  });
+
+  retryBtn.addEventListener('click', () => {
+    if (!ws || !currentData) return;
+    setRunning(true);
+    log("Bulunamayanlar derin taramaya alındı...", "#fbbf24");
+    ws.send(JSON.stringify({
+      action: 'start',
+      mode: 'unfound',
+      concurrency: parseInt(workerSlider.value),
+      deep_scan: deepCheck.checked,
+      company_col: columnSelect.value,
+      location_col: locationSelect.value
+    }));
+  });
+
+  stopBtn.addEventListener('click', () => {
+    if (!ws) return;
+    ws.send(JSON.stringify({ action: 'stop' }));
+    setRunning(false);
+    log("Durduruldu.", "#f87171");
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    window.location.href = '/api/download';
+  });
+
+  document.getElementById('btnFilterAll').addEventListener('click', () => { filterMode = 'all'; render(); });
+  document.getElementById('btnFilterFound').addEventListener('click', () => { filterMode = 'found'; render(); });
+
+  function copyText(txt) {
+    navigator.clipboard.writeText(txt);
+    alert(`Kopyalandı: ${txt}`);
+  }
+
+  function getCleanBrand(company) {
+    if (!company) return '';
+    return company.replace(/\(.*?\)/g, '').replace(/anonim|limited|şirketi|sirketi|sanayi|ticaret|a\.ş|ltd\.?\s*şti\.?/gi, '').trim();
+  }
+
+  function render() {
+    const list = filterMode === 'found' ? items.filter(x => (x.phone && x.phone !== '—' && x.status === 'Tamamlandı')) : items;
+    if (!list.length) {
+      tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #64748b; padding: 28px;">Kayıt bulunamadı.</td></tr>';
+      return;
+    }
+    tableBody.innerHTML = list.map((it, idx) => {
+      const isOk = it.status === 'Tamamlandı' || (it.phone && it.phone !== '—' && it.phone !== '');
+      const badge = isOk ? '<span class="badge-ok">Tamamlandı</span>' : '<span class="badge-fail">Bulunamadı</span>';
+      const compName = it.company || it[currentData?.detected_column] || '—';
+      const phoneVal = it.phone || it.Bulunan_Telefon || '—';
+      const urlVal = it.url || it.Telefon_Kaynak_URL || '—';
+      const cleanUrl = urlVal !== '—' ? `<a href="${urlVal}" target="_blank" style="color:#38bdf8;text-decoration:none;font-weight:600;font-size:11px;">${urlVal.substring(0, 45)}...</a>` : '<span style="color:#64748b;">—</span>';
+      
+      const searchBrand = getCleanBrand(compName);
+      const findUrl = `https://www.find.com.tr/Search?searchKey=${encodeURIComponent(searchBrand || compName)}`;
+      const googleUrl = `https://www.google.com/search?q=${encodeURIComponent((searchBrand || compName) + ' telefon iletişim')}`;
+
+      return `
+        <tr>
+          <td style="color:#64748b; font-family: ui-monospace, monospace;">${idx + 1}</td>
+          <td style="font-weight: 700; color:#f1f5f9;">${compName}</td>
+          <td style="font-family: ui-monospace, monospace; font-weight: 800; color:${isOk ? '#34d399' : '#64748b'};">
+            ${phoneVal} ${isOk ? `<button class="btn-copy" onclick="copyText('${phoneVal}')" title="Numarayı Kopyala">📋</button>` : ''}
+          </td>
+          <td>${badge}</td>
+          <td>${cleanUrl}</td>
+          <td style="text-align: center; display: flex; gap: 4px; justify-content: center;">
+            <a href="${findUrl}" target="_blank" class="btn-find" title="Find.com.tr'da Aç">🔍 Find</a>
+            <a href="${googleUrl}" target="_blank" class="btn-google" title="Google'da Aç">🌐 Google</a>
+            <button class="btn-ai" onclick="openAiModal('${encodeURIComponent(compName)}', '${phoneVal}', '${encodeURIComponent(urlVal)}')">🤖 AI</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // ==========================================
+  // EXCEL INTERACTIVE EDITOR LOGIC
+  // ==========================================
+  async function loadEditorTable() {
+    const search = document.getElementById('editorSearch').value;
+    try {
+      const res = await fetch(`/api/table?page=${editorPage}&page_size=50&search=${encodeURIComponent(search)}&filter_status=${currentTableFilter}&sort_by=found_first`);
+      const data = await res.json();
+      
+      document.getElementById('stFound').textContent = `Bulunan: ${data.found_total.toLocaleString()}`;
+      document.getElementById('stNotFound').textContent = `Bulunamayan: ${data.not_found_total.toLocaleString()}`;
+      document.getElementById('stPending').textContent = `Bekleyen: ${data.pending_total.toLocaleString()}`;
+      
+      document.getElementById('editorPageInfo').textContent = `Sayfa ${data.page} / ${data.total_pages || 1} (${data.total_rows.toLocaleString()} Kayıt)`;
+      document.getElementById('prevPageBtn').disabled = data.page <= 1;
+      document.getElementById('nextPageBtn').disabled = data.page >= data.total_pages;
+
+      if (!data.columns.length) {
+        document.getElementById('editorTableHead').innerHTML = '<tr><th>Dosya Yüklenmedi</th></tr>';
+        document.getElementById('editorTableBody').innerHTML = '<tr><td style="text-align:center;padding:28px;color:#64748b;">Lütfen önce bir Excel dosyası yükleyin.</td></tr>';
+        return;
+      }
+
+      let headHtml = '<tr><th style="width: 45px;">#</th>';
+      data.columns.forEach(col => {
+        headHtml += `<th>${col}</th>`;
+      });
+      headHtml += '<th style="width: 140px; text-align: center;">Hızlı Doğrulama</th><th style="width: 50px; text-align: center;">Sil</th></tr>';
+      document.getElementById('editorTableHead').innerHTML = headHtml;
+
+      let bodyHtml = '';
+      data.rows.forEach((row, i) => {
+        const rowIdx = row._row_idx;
+        const phone = row['Bulunan_Telefon'] || '';
+        const status = row['Durum'] || 'Bekliyor';
+        const isOk = status === 'Tamamlandı' || (phone && phone.trim() !== '');
+        const compVal = row[data.company_col] || row['Ünvan'] || row['ünvan'] || row[data.columns[0]] || '';
+        const urlVal = row['Telefon_Kaynak_URL'] || '';
+
+        const searchBrand = getCleanBrand(compVal);
+        const findUrl = `https://www.find.com.tr/Search?searchKey=${encodeURIComponent(searchBrand || compVal)}`;
+        const googleUrl = `https://www.google.com/search?q=${encodeURIComponent((searchBrand || compVal) + ' telefon iletişim')}`;
+
+        bodyHtml += `<tr><td style="color:#64748b; font-family: ui-monospace, monospace;">${(data.page - 1) * 50 + i + 1}</td>`;
+        data.columns.forEach(col => {
+          const val = row[col] || '';
+          
+          if (col === 'Durum') {
+            const badge = isOk ? '<span class="badge-ok">Tamamlandı</span>' : (status === 'Bulunamadı' ? '<span class="badge-fail">Bulunamadı</span>' : '<span class="badge-wait">Bekliyor</span>');
+            bodyHtml += `<td>${badge}</td>`;
+          } else if (col === 'Bulunan_Telefon') {
+            bodyHtml += `
+              <td class="editable-cell" onclick="editCell(this, ${rowIdx}, '${col}')" style="font-family: ui-monospace, monospace; font-weight: 800; color:${isOk ? '#34d399' : '#64748b'};">
+                ${val ? `${val} <button class="btn-copy" onclick="event.stopPropagation(); copyText('${val}')">📋</button>` : '<span style="color:#475569;">(boş - tıkla yaz)</span>'}
+              </td>
+            `;
+          } else if (col === 'Telefon_Kaynak_URL') {
+            const cleanUrl = val ? `<a href="${val}" target="_blank" style="color:#38bdf8;text-decoration:none;font-weight:600;font-size:11px;">${val.substring(0, 35)}...</a>` : '<span style="color:#475569;">—</span>';
+            bodyHtml += `<td>${cleanUrl}</td>`;
+          } else {
+            bodyHtml += `
+              <td class="editable-cell" onclick="editCell(this, ${rowIdx}, '${col}')" title="Düzenlemek için tıklayın">
+                ${val ? val : '<span style="color:#475569;">(boş)</span>'}
+              </td>
+            `;
+          }
+        });
+        
+        bodyHtml += `
+          <td style="text-align:center; display: flex; gap: 4px; justify-content: center; align-items: center;">
+            <a href="${findUrl}" target="_blank" class="btn-find" title="Find.com.tr'da Aç">🔍 Find</a>
+            <a href="${googleUrl}" target="_blank" class="btn-google" title="Google'da Aç">🌐 Google</a>
+            <button class="btn-ai" onclick="openAiModal('${encodeURIComponent(compVal)}', '${phone}', '${encodeURIComponent(urlVal)}')">🤖 AI</button>
+          </td>
+          <td style="text-align:center;">
+            <button onclick="deleteRow(${rowIdx})" style="background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.4);padding:4px 8px;border-radius:6px;font-size:10px;cursor:pointer;">🗑️</button>
+          </td>
+        </tr>`;
+      });
+      document.getElementById('editorTableBody').innerHTML = bodyHtml || '<tr><td colspan="12" style="text-align:center;padding:28px;color:#64748b;">Sonuç bulunamadı.</td></tr>';
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function editCell(td, rowIdx, colName) {
+    if (td.querySelector('input')) return;
+    const currentVal = td.textContent.trim() === '(boş)' || td.textContent.trim().includes('(boş') ? '' : td.textContent.trim();
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentVal.replace('📋', '').trim();
+    input.style.width = '100%';
+    input.style.padding = '4px 8px';
+    input.style.fontSize = '12px';
+    
+    td.innerHTML = '';
+    td.appendChild(input);
+    input.focus();
+
+    async function save() {
+      const newVal = input.value.trim();
+      td.innerHTML = newVal || '<span style="color:#475569;">(boş)</span>';
+      if (newVal !== currentVal) {
+        await fetch('/api/update_cell', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ row_index: rowIdx, column_name: colName, new_value: newVal })
+        });
+      }
+    }
+
+    input.addEventListener('blur', save);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') save();
+      if (e.key === 'Escape') td.innerHTML = currentVal || '<span style="color:#475569;">(boş)</span>';
+    });
+  }
+
+  async function deleteRow(rowIdx) {
+    if (!confirm(`${rowIdx + 1}. satırı silmek istediğinize emin misiniz?`)) return;
+    await fetch(`/api/delete_row?row_index=${rowIdx}`, { method: 'POST' });
+    loadEditorTable();
+  }
+
+  document.getElementById('editorSearch').addEventListener('input', (e) => {
+    editorPage = 1;
+    loadEditorTable();
+  });
+  document.getElementById('editorRefreshBtn').addEventListener('click', loadEditorTable);
+  document.getElementById('prevPageBtn').addEventListener('click', () => { if (editorPage > 1) { editorPage--; loadEditorTable(); } });
+  document.getElementById('nextPageBtn').addEventListener('click', () => { editorPage++; loadEditorTable(); });
+
+  // ==========================================
+  // AI COMPANY INTELLIGENCE MODAL LOGIC
+  // ==========================================
+  async function openAiModal(encodedComp, phone, encodedUrl) {
+    const comp = decodeURIComponent(encodedComp);
+    const url = decodeURIComponent(encodedUrl);
+    const modal = document.getElementById('aiModal');
+    const modalTitle = document.getElementById('aiModalTitle');
+    const modalBody = document.getElementById('aiModalBody');
+
+    modalTitle.textContent = comp;
+    modal.style.display = 'flex';
+    modalBody.innerHTML = `
+      <div style="text-align: center; padding: 36px; color: #38bdf8;">
+        <div style="font-size: 32px; animation: spin 1.2s linear infinite; display: inline-block;">⚡</div>
+        <div style="margin-top: 14px; font-weight: 800; font-size: 14px;">Antigravity Yapay Zeka Şirketi Analiz Ediyor...</div>
+        <div style="font-size: 11px; color: #64748b; margin-top: 4px;">Web sitesi, faaliyet alanı ve istihbarat verileri taranıyor</div>
+      </div>
+    `;
+
+    try {
+      const res = await fetch('/api/ai_company_info', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company_name: comp, phone: phone !== '—' ? phone : null, website: url !== '—' ? url : null })
+      });
+      const ai = await res.json();
+
+      modalBody.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          
+          <div style="background: linear-gradient(135deg, rgba(7, 13, 30, 0.9), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 10px; color: #94a3b8; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px;">FAALİYET ALANI / SEKTÖR</div>
+              <div style="font-size: 15px; font-weight: 900; color: #38bdf8; margin-top: 3px;">🏢 ${ai.sector}</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 10px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">TELEFON</div>
+              <div style="font-size: 14px; font-weight: 800; color: #34d399; font-family: ui-monospace, monospace;">📞 ${ai.phone}</div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 12px; font-weight: 800; color: #a78bfa; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+              <span>📋</span> YAPAY ZEKA YÖNETİCİ ÖZETİ
+            </div>
+            <div style="background: rgba(9, 13, 22, 0.9); border: 1px solid #1e293b; border-radius: 10px; padding: 14px; font-size: 12px; line-height: 1.6; color: #f1f5f9;">
+              ${ai.summary}
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; font-weight: 800; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🌐 DOĞRULANAN DİJİTAL VARLIKLAR</div>
+            <div style="background: rgba(7, 13, 30, 0.8); border: 1px solid #1e293b; border-radius: 10px; padding: 10px 14px; font-size: 11px;">
+              ${ai.website !== '—' ? `<div><b>Resmi Web Sitesi:</b> <a href="${ai.website}" target="_blank" style="color:#38bdf8;font-weight:700;">${ai.website}</a></div>` : '<div style="color:#64748b;">Doğrulanmış web sitesi bulunamadı</div>'}
+            </div>
+          </div>
+
+        </div>
+      `;
+    } catch (err) {
+      modalBody.innerHTML = `<div style="color:#f87171;text-align:center;padding:20px;">Analiz yüklenirken hata oluştu: ${err.message}</div>`;
+    }
+  }
+
+  function closeAiModal() {
+    document.getElementById('aiModal').style.display = 'none';
+  }
+
+  fetch('/api/files').then(r => r.json()).then(d => {
+    if (d.files && d.files.length) {
+      fetch('/api/select_file?filename=' + encodeURIComponent(d.files[0]), { method: 'POST' })
+        .then(r => r.json()).then(onFileLoaded);
+    }
+  });
+</script>
+</body>
+</html>
