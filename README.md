@@ -66,7 +66,7 @@ Tarayıcınızda **`http://127.0.0.1:8000`** adresine gidin.
 ## 📖 Kullanım Kılavuzu
 
 ```
-1. 📂 Excel/CSV Dosyası Seçin  ➔  (Örn: 15.000 satırlık İTO listesi)
+1. 📂 Excel/CSV Dosyası Seçin  ➔  
 2. ⚙️ Worker Hızını Ayarlayın   ➔  (Maksimum hız için 20 - 25 Worker)
 3. 🚀 Taramayı Başlatın         ➔  (Canlı Radardan ilerlemeyi izleyin)
 4. 🔍 Find.com.tr Entegrasyonu ➔  (Bulunamayanları 1-tıkla açın ve numarayı kaydedin)
