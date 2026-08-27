@@ -20,11 +20,16 @@ yarn-error.log*
 *.tmp
 *.bak
 
-# Geçici Analiz ve Test Dosyaları
+# Geçici Analiz ve Test Betikleri
 test_ito.py
 test_crypto.py
 inspect_*.py
-find_*.py
+find_api_*.py
+find_endpoints_*.py
+find_ito_*.py
+find_baseurl.py
+find_services.py
+find_e_calls.py
 check_chunks.py
 
 # OS / Editör
